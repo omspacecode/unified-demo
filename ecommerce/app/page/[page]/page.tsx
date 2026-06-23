@@ -14,7 +14,7 @@ interface PageProps {
 // export const revalidate = 500;
 
 export default async function Page(props: PageProps) {
-  const builderModelName = "freeform-page";
+  const builderModelName = "page";
   let locale = "en-US";
 
   const content = await builder
