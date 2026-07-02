@@ -8,6 +8,7 @@ import BynderImage from "./components/Blocks/BynderImage";
 import CloudinaryImage from "./components/Blocks/CloudinaryImage";
 import { Collection } from "./components/Collection/Collection";
 import Counter from "./components/Counter/Counter";
+import HeroCarousel from "./components/Hero/HeroCarousel";
 import HeroWithChildren from "./components/Hero/HeroWithChildren";
 import IconCard from "./components/Card/IconCard";
 import ImageHero from "./components/Hero/ImageHero";
@@ -77,6 +78,7 @@ Builder.register("insertMenu", {
     { name: "ImageHero" },
     { name: "SplitHero" },
     { name: "HeroWithChildren" },
+    { name: "HeroCarousel" },
   ],
   // priority: 2,
 });
@@ -260,6 +262,76 @@ Builder.registerComponent(IconCard, {
       type: "string",
       defaultValue: "Builder.io",
       required: true,
+    },
+  ],
+});
+
+Builder.registerComponent(HeroCarousel, {
+  name: "HeroCarousel",
+  friendlyName: "Hero Carousel",
+  image:
+    "https://cdn.builder.io/api/v1/image/assets%2Fa87584e551b6472fa0f0a2eb10f2c0ff%2F6c33301bb9e94d46ad293b704457b991",
+  inputs: [
+    {
+      name: "slides",
+      type: "list",
+      subFields: [
+        {
+          name: "src",
+          type: "file",
+          allowedFileTypes: ["jpeg", "jpg", "png", "webp", "svg"],
+          required: true,
+        },
+        { name: "alt", type: "string", defaultValue: "" },
+      ],
+      defaultValue: [
+        {
+          src: "https://api.builder.io/api/v1/image/assets/TEMP/a623ee38fc91398635b8034da0b2347074a1befb?width=2362",
+          alt: "Nike athlete training with a battle rope",
+        },
+        {
+          src: "https://api.builder.io/api/v1/image/assets/TEMP/a0aec7389b59c267fe9e6cb147a75e605ac97963?width=2362",
+          alt: "Nike athlete in motion",
+        },
+      ],
+      required: true,
+    },
+    {
+      name: "autoPlay",
+      type: "boolean",
+      defaultValue: true,
+    },
+    {
+      name: "interval",
+      friendlyName: "Autoplay interval (ms)",
+      type: "number",
+      defaultValue: 5000,
+      showIf: (options: any) => options.get("autoPlay") === true,
+    },
+    {
+      name: "showDots",
+      friendlyName: "Show pagination dots",
+      type: "boolean",
+      defaultValue: true,
+    },
+    {
+      name: "showArrows",
+      friendlyName: "Show prev/next arrows",
+      type: "boolean",
+      defaultValue: true,
+    },
+    {
+      name: "showPauseControl",
+      friendlyName: "Show play/pause control",
+      type: "boolean",
+      defaultValue: true,
+    },
+    {
+      name: "heightClassName",
+      friendlyName: "Height (Tailwind classes)",
+      type: "string",
+      defaultValue: "h-[280px] sm:h-[380px] md:h-[494px]",
+      advanced: true,
     },
   ],
 });
