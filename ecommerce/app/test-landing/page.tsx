@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { Inter } from "next/font/google";
 import { Button } from "@/src/components/ui/button";
+import { HeroCarousel } from "@/src/components/Hero/HeroCarousel";
 
 const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600"] });
 
@@ -81,82 +81,9 @@ function SpotlightIcon() {
 }
 
 export default function TestLandingPage() {
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  const goToSlide = (index: number) => {
-    setActiveSlide((index + HERO_SLIDES.length) % HERO_SLIDES.length);
-  };
-
   return (
     <div className={inter.className}>
-      {/* Hero carousel */}
-      <section className="-mx-8 relative overflow-hidden bg-black">
-        <div className="relative h-[280px] sm:h-[380px] md:h-[494px] w-full">
-          {HERO_SLIDES.map((slide, index) => (
-            <img
-              key={slide.src}
-              src={slide.src}
-              alt={slide.alt}
-              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-                index === activeSlide ? "opacity-100" : "opacity-0"
-              }`}
-            />
-          ))}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/60 to-transparent" />
-
-          <div className="absolute bottom-4 left-4 flex items-center gap-3 sm:bottom-6 sm:left-6">
-            <button
-              type="button"
-              aria-label={isPaused ? "Play carousel" : "Pause carousel"}
-              onClick={() => setIsPaused((p) => !p)}
-              className="flex h-6 w-6 items-center justify-center text-white"
-            >
-              {isPaused ? (
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
-              ) : (
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z" /></svg>
-              )}
-            </button>
-            <div className="flex items-center gap-2">
-              {HERO_SLIDES.map((_, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  aria-label={`Go to slide ${index + 1}`}
-                  onClick={() => goToSlide(index)}
-                  className={`h-2 w-2 rounded-full transition-colors ${
-                    index === activeSlide ? "bg-white" : "bg-white/40"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="absolute bottom-4 right-4 flex items-center gap-2 sm:bottom-6 sm:right-6">
-            <button
-              type="button"
-              aria-label="Previous slide"
-              onClick={() => goToSlide(activeSlide - 1)}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-white/70 hover:bg-white"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M15.5251 18.966L8.55811 12L15.5251 5.03296" stroke="black" strokeWidth="1.5" />
-              </svg>
-            </button>
-            <button
-              type="button"
-              aria-label="Next slide"
-              onClick={() => goToSlide(activeSlide + 1)}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-white/70 hover:bg-white"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M8.47412 18.966L15.4401 12L8.47412 5.03296" stroke="black" strokeWidth="1.5" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </section>
+      <HeroCarousel slides={HERO_SLIDES} className="-mx-8" />
 
       {/* Featured */}
       <section className="pt-10 pb-4">
