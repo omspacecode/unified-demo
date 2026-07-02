@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Button } from "./button";
 
 interface ProductBoxProps {
   productData: any;
@@ -23,27 +24,52 @@ const ProductBox: React.FC<ProductBoxProps> = ({ productData }) => {
   }
 
   return (
-    <a className="block w-full" href={`/product/${product?.handle}`}>
-      <div className="w-full h-[300px] border border-zinc-300 rounded-md overflow-hidden relative">
-        <Image
-          src={image.image}
-          alt={image.altText || productName || "Product image"}
-          fill={true}
-          style={{ objectFit: "cover" }}
-          loading="lazy"
-          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 400px"
-        />
-      </div>
-      <div className="flex flex-col mt-3 w-full">
-        <div className="flex gap-3 justify-between w-full text-black text-left">
-          <div className="text-ellipsis overflow-hidden break-words">
+    <a
+      className="group block w-full [perspective:1200px]"
+      href={`/product/${product?.handle}`}
+    >
+      <div className="relative h-[380px] w-full transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+        {/* Front face */}
+        <div className="absolute inset-0 flex flex-col [backface-visibility:hidden]">
+          <div className="relative h-[300px] w-full overflow-hidden rounded-md border border-zinc-300">
+            <Image
+              src={image.image}
+              alt={image.altText || productName || "Product image"}
+              fill={true}
+              style={{ objectFit: "cover" }}
+              loading="lazy"
+              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 400px"
+            />
+          </div>
+          <div className="mt-3 flex w-full flex-col">
+            <div className="flex w-full justify-between gap-3 text-left text-black">
+              <div className="overflow-hidden text-ellipsis break-words">
+                {productName}
+              </div>
+              <p className="font-semibold">${product?.price}</p>
+            </div>
+            <p className="mt-1 text-left text-stone-500">
+              {product?.colors?.[0]?.label}
+            </p>
+          </div>
+        </div>
+
+        {/* Back face */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-md border border-zinc-300 bg-black p-6 text-center text-white [backface-visibility:hidden] [transform:rotateY(180deg)]">
+          <div className="overflow-hidden text-ellipsis break-words font-medium">
             {productName}
           </div>
-          <p className="font-semibold">${product?.price}</p>
+          <p className="text-2xl font-semibold">${product?.price}</p>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+          >
+            Add to Cart
+          </Button>
         </div>
-        <p className="mt-1 text-left text-stone-500">
-          {product?.colors?.[0]?.label}
-        </p>
       </div>
     </a>
   );
