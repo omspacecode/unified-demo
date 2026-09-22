@@ -7,6 +7,7 @@ import { Button } from "./components/ui/button";
 import BynderImage from "./components/Blocks/BynderImage";
 import CloudinaryImage from "./components/Blocks/CloudinaryImage";
 import { Collection } from "./components/Collection/Collection";
+import CarouselV1 from "./components/Carousel/CarouselV1";
 import Counter from "./components/Counter/Counter";
 import HeroWithChildren from "./components/Hero/HeroWithChildren";
 import IconCard from "./components/Card/IconCard";
@@ -92,6 +93,7 @@ if (Builder.isBrowser) {
       items: [
         { name: "Columns" },
         { name: "Builder:Carousel" },
+        { name: "Carousel V1" },
         { name: "Collection" },
         { name: "Accordion" },
         { name: "AlgoliaSearchBox" },
@@ -108,6 +110,52 @@ if (Builder.isBrowser) {
     });
   }
 }
+
+Builder.registerComponent(CarouselV1, {
+  name: "Carousel V1",
+  inputs: [
+    {
+      name: "cards",
+      type: "list",
+      defaultValue: [
+        {
+          title: "New arrivals",
+          description: "Fresh silhouettes and everyday essentials made for your next chapter.",
+          image: "https://cdn.builder.io/api/v1/image/assets%2F823257bc2abd4ebfb9f360afbc282eaf%2F830b0c8283054d4c876bc1dc3b58ae90",
+          imageAlt: "New arrivals",
+          link: "/category/new-arrivals",
+          linkText: "Shop now",
+        },
+        {
+          title: "The essentials",
+          description: "Thoughtful staples designed to work harder in your wardrobe.",
+          image: "https://cdn.builder.io/api/v1/image/assets%2F823257bc2abd4ebfb9f360afbc282eaf%2F830b0c8283054d4c876bc1dc3b58ae90",
+          imageAlt: "The essentials",
+          link: "/category/tops",
+          linkText: "Explore collection",
+        },
+      ],
+      subFields: [
+        { name: "title", type: "string" },
+        { name: "description", type: "longText" },
+        { name: "image", type: "file" },
+        { name: "imageAlt", type: "string" },
+        { name: "link", type: "url" },
+        { name: "linkText", type: "string" },
+      ],
+    },
+    {
+      name: "backgroundColor",
+      type: "color",
+      defaultValue: "#f4f1ed",
+    },
+    {
+      name: "accentColor",
+      type: "color",
+      defaultValue: "#111111",
+    },
+  ],
+});
 
 Builder.registerComponent(AlgoliaSearchBox, {
   name: "AlgoliaSearchBox",
