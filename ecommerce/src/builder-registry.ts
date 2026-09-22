@@ -83,8 +83,12 @@ Builder.register("insertMenu", {
 });
 Builder.register("insertMenu", {
   name: "Cards",
-  items: [{ name: "IconCard" }, { name: "ProductCard" }],
+  items: [{ name: "IconCard" }, { name: "ProductCard" }, { name: "Carousel V1" }],
   // priority: 3,
+});
+Builder.register("insertMenu", {
+  name: "Carousels",
+  items: [{ name: "Carousel V1" }],
 });
 if (Builder.isBrowser) {
   if (builder.editingModel === "homepage") {
@@ -93,7 +97,6 @@ if (Builder.isBrowser) {
       items: [
         { name: "Columns" },
         { name: "Builder:Carousel" },
-        { name: "Carousel V1" },
         { name: "Collection" },
         { name: "Accordion" },
         { name: "AlgoliaSearchBox" },
