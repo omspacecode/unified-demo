@@ -83,12 +83,12 @@ Builder.register("insertMenu", {
 });
 Builder.register("insertMenu", {
   name: "Cards",
-  items: [{ name: "IconCard" }, { name: "ProductCard" }, { name: "Carousel V1" }],
+  items: [{ name: "IconCard" }, { name: "ProductCard" }, { name: "CarouselV1" }],
   // priority: 3,
 });
 Builder.register("insertMenu", {
   name: "Carousels",
-  items: [{ name: "Carousel V1" }],
+  items: [{ name: "CarouselV1" }],
 });
 if (Builder.isBrowser) {
   if (builder.editingModel === "homepage") {
@@ -115,7 +115,8 @@ if (Builder.isBrowser) {
 }
 
 Builder.registerComponent(CarouselV1, {
-  name: "Carousel V1",
+  name: "CarouselV1",
+  friendlyName: "Carousel V1",
   inputs: [
     {
       name: "cards",
